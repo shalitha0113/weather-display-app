@@ -10,6 +10,7 @@ const uv=$("#uv");
 const visibility = $("#visibility");
 const cityInput=document.querySelector("#sec-input");
 
+
 function searchBtnOnClick(){
     const cityName=cityInput.value.trim();
     
@@ -28,6 +29,7 @@ function searchBtnOnClick(){
          pressure.text(resp.current.pressure_mb);
          uv.text(resp.current.uv);
          visibility.text(resp.current.vis_km);
+        
       }
    });
    

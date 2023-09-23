@@ -129,13 +129,13 @@ button:hover{
 }
 
 .sec-search input{
-    height: 45px;
+    height: 40px;
     border-radius: 12px;
 }
 
 .sec-search button{
     position: relative;
-    left: -85px;
+    left: 80 px;
     border-radius: 12px;
 }
 
