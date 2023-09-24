@@ -33,6 +33,24 @@ function searchBtnOnClick(){
          visibility.text(resp.current.vis_km);
         
       }
-   });
+   }); 
    
+   // Set Forecast Data
+   $.ajax({
+      method: "GET",
+      url:`http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${cityName}&days=4`,
+      success:(data)=>{
+         for (let index = 1; index < data.forecast.forecastday.length; index++) {
+            $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
+            $(`#imgForcastD${index}`).attr("src", data.forecast.forecastday[index].day.condition.icon);
+            $(`#tempForecastD${index}`).html(data.forecast.forecastday[index].day.avgtemp_c+ "°C");
+            $(`#conditionForecastD${index}`).html(data.forecast.forecastday[index].day.condition.text);
+            $(`#maxTempForecastD${index}`).html(data.forecast.forecastday[index].day.maxtemp_c + "°C");
+            $(`#minTempForecastD${index}`).html(data.forecast.forecastday[index].day.mintemp_c + "°C");
+            $(`#humForecastD${index}`).html(data.forecast.forecastday[index].day.avghumidity + "%");
+            $(`#rainForecstD${index}`).html(data.forecast.forecastday[index].day.daily_chance_of_rain+ "%");
+            $(`#snowForecastD${index}`).html(data.forecast.forecastday[index].day.daily_chance_of_snow+ "%");
+         }
+      }
+   });
 }
