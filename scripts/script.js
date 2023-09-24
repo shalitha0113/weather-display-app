@@ -1,5 +1,6 @@
 const locationName = $("#locationName");
-const  localtime= $("#localTime");
+const imgWeather= $("#imgWeather");
+// const  localtime= $("#localTime");
 const txtWeather= $("#txtWeather");
 const temp=$("#temp");
 const humidity= $("#humidity");
@@ -20,7 +21,8 @@ function searchBtnOnClick(){
       success : (resp) => {
          console.log(resp);
          locationName.text(resp.location.name);
-         localtime.text(resp.location.localtime);
+         imgWeather[0].src=resp.current.condition.icon;
+         // localtime.text(resp.location.localtime);
          txtWeather.text(resp.current.condition.text);
          temp.text(resp.current.temp_c);
          humidity.text(resp.current.humidity);
