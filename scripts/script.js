@@ -3,7 +3,6 @@ const apiKey = "28db3eb606154f67aec162526231909";
 
 const locationName = $("#locationName");
 const imgWeather = $("#imgWeather");
-// const  localtime= $("#localTime");
 const txtWeather = $("#txtWeather");
 const temp = $("#temp");
 const humidity = $("#humidity");
@@ -46,7 +45,6 @@ if (navigator.geolocation) {
             console.log(resp);
             locationName.text(resp.location.name);
             imgWeather[0].src = resp.current.condition.icon;
-            // localtime.text(resp.location.localtime);
             txtWeather.text(resp.current.condition.text);
             temp.text(resp.current.temp_c);
             humidity.text(resp.current.humidity);
@@ -59,6 +57,8 @@ if (navigator.geolocation) {
          }
       });
 
+
+      //Display Forcast data
       $.ajax({
          method: "GET",
          url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=4`,
@@ -79,10 +79,7 @@ if (navigator.geolocation) {
       map.setView([latitude,longitude],13);
       L.marker([latitude,longitude]).addTo(map);
 
-
       
-
-
    }, function (error) {
       // Handle errors (e.g. user denied location access)
       console.error("Error getting current location: " + error.message);
@@ -111,6 +108,7 @@ async function fetchText(lat, long) {
 
 function searchBtnOnClick() {
    const cityName = cityInput.value.trim();
+   
 
    $.ajax({
       method: "GET",
@@ -119,7 +117,6 @@ function searchBtnOnClick() {
          console.log(resp);
          locationName.text(resp.location.name);
          imgWeather[0].src = resp.current.condition.icon;
-         // localtime.text(resp.location.localtime);
          txtWeather.text(resp.current.condition.text);
          temp.text(resp.current.temp_c);
          humidity.text(resp.current.humidity);
@@ -128,6 +125,10 @@ function searchBtnOnClick() {
          pressure.text(resp.current.pressure_mb);
          uv.text(resp.current.uv);
          visibility.text(resp.current.vis_km);
+         const lt = resp.location.lat;
+         const lng = resp.location.lon;
+         map.setView([lt,lng],13);
+         L.marker([lt,lng]).addTo(map);
 
       }
    });
@@ -150,7 +151,6 @@ function searchBtnOnClick() {
          }
       }
    });
-   map.setView([latitude,longitude],13);
-      L.marker([latitude,longitude]).addTo(map);
+
 }
 
