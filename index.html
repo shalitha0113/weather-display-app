@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather-App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 
 </head>
+
 <body>
     <!-- <div class="nav-bar" >
         <div  class="features" >Features</div>
@@ -26,32 +34,34 @@
             <a href="">Settings</a>
         </nav>
         <div class="btn-section">
-            <button class="btn-swiftmode"><img src="assets/dark-mode.png" alt="" width="18" height="18" ></button>
+            <button class="btn-swiftmode"><img src="assets/dark-mode.png" alt="" width="18" height="18"></button>
             <button class="btn-login">Login</button>
             <button class="btn-signup">Sign up</button>
-        </div> 
+        </div>
     </header>
 
-    
+
     <section class="sec-search">
-        <input   id="sec-input" class="form-control me-2" type="search" placeholder="Search City/Postal Code/Latitude & Longitude.." aria-label="Search">
+        <input id="sec-input" class="form-control me-2" type="search"
+            placeholder="Search City/Postal Code/Latitude & Longitude.." aria-label="Search">
         <button class="btn btn-outline-primary" type="submit" onclick="searchBtnOnClick()">Search</button>
-    </section> 
+    </section>
 
     <Section class="sec-current-weather">
         <div class="cw-1">
             <h5 id="localTime">Today</h5>
-            <img  id="imgWeather" src="assets/icons8-sunny-48.png" alt="" width="82px" height="82px" class="currentWeather">
+            <img id="imgWeather" src="assets/icons8-sunny-48.png" alt="" width="82px" height="82px"
+                class="currentWeather">
         </div>
 
         <div class="cw-2">
             <h3 id="locationName">location</h3>
             <p id="txtWeather">Sunny</p>
             <div class="value">
-                <span id="temp" >26</span>
-                <span >&deg;</span>
-                <span >C</span>
-              </div>
+                <span id="temp">26</span>
+                <span>&deg;</span>
+                <span>C</span>
+            </div>
 
         </div>
 
@@ -112,135 +122,158 @@
         <h2>Forecast</h2>
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <table >
-                    <tr rowspan="7">
-                        <td ><h4 id="forecastDay1"></h4></td>
-                    </tr>
-                    <tr>
-                        <td><img id="imgForcastD1" src="" alt=""></td>
-                        <td id="tempForecastD1"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" id="conditionForecastD1"></td>  
-                    </tr>
-                    <tr>
-                        <td>Max temp</td>
-                        <td id="maxTempForecastD1"></td>
-                    </tr>
-                    <tr>
-                        <td>Min temp</td>
-                        <td id="minTempForecastD1"></td>
-                    </tr>
-                    <tr>
-                        <td>Humidity</td>
-                        <td id="humForecastD1"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to rain</td>
-                        <td id="rainForecstD1"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to snow</td>
-                        <td id="snowForecastD1"></td>
-                    </tr>
-                </table>
-                
-              </div>
-              <div class="carousel-item">
-                <table >
-                    <tr rowspan="7">
-                        <td ><h4 id="forecastDay2"></h4></td>
-                    </tr>
-                    <tr>
-                        <td><img id="imgForcastD2" src="" alt=""></td>
-                        <td id="tempForecastD2"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" id="conditionForecastD2"></td>  
-                    </tr>
-                    <tr>
-                        <td>Max temp</td>
-                        <td id="maxTempForecastD2"></td>
-                    </tr>
-                    <tr>
-                        <td>Min temp</td>
-                        <td id="minTempForecastD2"></td>
-                    </tr>
-                    <tr>
-                        <td>Humidity</td>
-                        <td id="humForecastD2"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to rain</td>
-                        <td id="rainForecstD2"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to snow</td>
-                        <td id="snowForecastD2"></td>
-                    </tr>
-                </table>
-              </div>
-              <div class="carousel-item">
-                <table >
-                    <tr rowspan="7">
-                        <td ><h4 id="forecastDay3"></h4></td>
-                    </tr>
-                    <tr>
-                        <td><img id="imgForcastD3" src="" alt=""></td>
-                        <td id="tempForecastD3"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" id="conditionForecastD3"></td>  
-                    </tr>
-                    <tr>
-                        <td>Max temp</td>
-                        <td id="maxTempForecastD3"></td>
-                    </tr>
-                    <tr>
-                        <td>Min temp</td>
-                        <td id="minTempForecastD3"></td>
-                    </tr>
-                    <tr>
-                        <td>Humidity</td>
-                        <td id="humForecastD3"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to rain</td>
-                        <td id="rainForecstD3"></td>
-                    </tr>
-                    <tr>
-                        <td>Chance to snow</td>
-                        <td id="snowForecastD3"></td>
-                    </tr>
-                </table>
-              </div>
+                <div class="carousel-item active">
+                    <table>
+                        <tr rowspan="7">
+                            <td>
+                                <h4 id="forecastDay1"></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img id="imgForcastD1" src="" alt=""></td>
+                            <td id="tempForecastD1"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="conditionForecastD1"></td>
+                        </tr>
+                        <tr>
+                            <td>Max temp</td>
+                            <td id="maxTempForecastD1"></td>
+                        </tr>
+                        <tr>
+                            <td>Min temp</td>
+                            <td id="minTempForecastD1"></td>
+                        </tr>
+                        <tr>
+                            <td>Humidity</td>
+                            <td id="humForecastD1"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to rain</td>
+                            <td id="rainForecstD1"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to snow</td>
+                            <td id="snowForecastD1"></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="carousel-item">
+                    <table>
+                        <tr rowspan="7">
+                            <td>
+                                <h4 id="forecastDay2"></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img id="imgForcastD2" src="" alt=""></td>
+                            <td id="tempForecastD2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="conditionForecastD2"></td>
+                        </tr>
+                        <tr>
+                            <td>Max temp</td>
+                            <td id="maxTempForecastD2"></td>
+                        </tr>
+                        <tr>
+                            <td>Min temp</td>
+                            <td id="minTempForecastD2"></td>
+                        </tr>
+                        <tr>
+                            <td>Humidity</td>
+                            <td id="humForecastD2"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to rain</td>
+                            <td id="rainForecstD2"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to snow</td>
+                            <td id="snowForecastD2"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="carousel-item">
+                    <table>
+                        <tr rowspan="7">
+                            <td>
+                                <h4 id="forecastDay3"></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img id="imgForcastD3" src="" alt=""></td>
+                            <td id="tempForecastD3"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="conditionForecastD3"></td>
+                        </tr>
+                        <tr>
+                            <td>Max temp</td>
+                            <td id="maxTempForecastD3"></td>
+                        </tr>
+                        <tr>
+                            <td>Min temp</td>
+                            <td id="minTempForecastD3"></td>
+                        </tr>
+                        <tr>
+                            <td>Humidity</td>
+                            <td id="humForecastD3"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to rain</td>
+                            <td id="rainForecstD3"></td>
+                        </tr>
+                        <tr>
+                            <td>Chance to snow</td>
+                            <td id="snowForecastD3"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-          </div>
-          <hr>
+        </div>
+        <hr>
+
+        <div>
+            <div id="map"></div>
+        </div>
     </section>
 
     <section class="current-day">
+        <div><h3>Today's Forecast</h3></div>
+        <div class="">
+
+        </div>
+        
 
     </section>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="scripts/script.js"></script>
 </body>
+
 </html>

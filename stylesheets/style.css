@@ -256,5 +256,12 @@ table{
     margin: 5px auto ;
 }
 
+#map{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    left: 25px;
+}
+
 
 
