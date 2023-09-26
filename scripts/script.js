@@ -79,6 +79,24 @@ if (navigator.geolocation) {
       map.setView([latitude,longitude],13);
       L.marker([latitude,longitude]).addTo(map);
 
+      //Display Today's Weather
+
+      $.ajax({
+         method: "GET",
+         url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=0`,
+         success:(data)=>{
+            for(let i=6;i<23;i++){
+               if(i%3==0){
+                  $(`#imgHour${i}`).attr("src", data.forecast.forecastday[0].day.condition.icon);
+                  $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c+ "°C");
+                  $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph+ "Km/h")
+                  $(`#humHour${i}`).html(data.forecast.forecastday[0].hour[i].humidity + "%");
+               }
+
+            }
+         }
+      });
+
       
    }, function (error) {
       // Handle errors (e.g. user denied location access)
@@ -148,6 +166,23 @@ function searchBtnOnClick() {
             $(`#humForecastD${index}`).html(data.forecast.forecastday[index].day.avghumidity + "%");
             $(`#rainForecstD${index}`).html(data.forecast.forecastday[index].day.daily_chance_of_rain + "%");
             $(`#snowForecastD${index}`).html(data.forecast.forecastday[index].day.daily_chance_of_snow + "%");
+         }
+      }
+   });
+
+    //Display Today's Weather
+    $.ajax({
+      method: "GET",
+      url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${cityName}&days=0`,
+      success:(data)=>{
+         for(let i=6;i<23;i++){
+            if(i%3==0){
+               $(`#imgHour${i}`).attr("src", data.forecast.forecastday[0].day.condition.icon);
+               $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c+ "°C");
+               $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph+ "Km/h")
+               $(`#humHour${i}`).html(data.forecast.forecastday[0].hour[i].humidity + "%");
+            }
+
          }
       }
    });
