@@ -7,7 +7,7 @@
     <title>Weather-App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-   
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="stylesheets/style.css">
@@ -18,13 +18,6 @@
 </head>
 
 <body>
-    <!-- <div class="nav-bar" >
-        <div  class="features" >Features</div>
-        <div class="news">News<br/></div>
-        <div class="contactUs" >Contact us <br/></div>
-        <div class="settings" >Settings</div>
-        <div><button class="features">Features</button></div>
-    </div> -->
 
     <header class="header">
         <span class="logo"><img src="assets/logo1.png" alt="" width="216px" height="69.66px"></span>
@@ -47,6 +40,8 @@
             placeholder="Search City/Postal Code/Latitude & Longitude.." aria-label="Search">
         <button class="btn btn-outline-primary" type="submit" onclick="searchBtnOnClick()">Search</button>
     </section>
+
+    
 
     <Section class="sec-current-weather">
         <div class="cw-1">
@@ -260,8 +255,10 @@
     </section>
 
     <section class="current-day">
-        <div><h3>Today's Forecast</h3></div>
-        
+        <div>
+            <h3>Today's Forecast</h3>
+        </div>
+
         <ul class="day-forcast">
             <div class="weatherTime-Card">
                 <h5>6.00 AM</h5>
@@ -325,8 +322,47 @@
             </div>
         </ul>
 
-      
+
     </section>
+
+    <section class="weather-history">
+        <h3>History</h3>
+        <p >Search for a city to get Historical weather conditions.</p>
+        <input type="date" id="selectDate">
+        <button class="btn btn-primary" type="submit" onclick="historyBtnOnClick()">Select Date</button>
+        <table  class="table table-hover">
+            <tr >
+                <td>
+                    <h4 id="historyDate"></h4>
+                </td>
+            </tr>
+            <tr>
+                <td><img id="historyImg" src="" alt=""></td>
+                <td id="historyTemp"></td>
+            </tr>
+            <tr>
+                <td  id="historyCondition"></td>
+            </tr>
+            <tr>
+                <td>Max temp</td>
+                <td id="historyMaxTemp"></td>
+            </tr>
+            <tr>
+                <td>Min temp</td>
+                <td id="historyMinTemp"></td>
+            </tr>
+            <tr>
+                <td>Humidity</td>
+                <td id="historyHumidity"></td>
+            </tr>
+        </table>
+    </section>
+
+
+    
+    
+    
+      <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

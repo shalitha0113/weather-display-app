@@ -282,5 +282,17 @@ table{
 
 }
 
+.weather-history{
+    position: relative;
+    top: -520px;
+    left: 140px;
+    width: 1170px;
+    height:400px;
+    background-color: rgb(83, 238, 186);
+    border-radius: 12px;
+    padding: 20px;
+    
+}
+
 
 

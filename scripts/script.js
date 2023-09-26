@@ -189,3 +189,24 @@ function searchBtnOnClick() {
 
 }
 
+function historyBtnOnClick(){
+   const inputDate=selectDate.value;
+  
+
+   $.ajax({
+      method: "GET",
+      url : `http://api.weatherapi.com/v1/history.json?key=28db3eb606154f67aec162526231909&q=Colombo&dt=${inputDate}`,
+      success:(data)=>{
+         $(`#historyDate`).html(data.forecast.forecastday[0].date);
+         $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
+         $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
+         $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
+         $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
+         $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
+         $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
+
+      }
+
+   });
+}
+
