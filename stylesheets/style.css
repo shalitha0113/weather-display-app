@@ -294,5 +294,9 @@ table{
     
 }
 
+.weather-history table{
+    max-width: 300px;
+}
+
 
 

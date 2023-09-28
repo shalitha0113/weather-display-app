@@ -1,5 +1,8 @@
 const apiKey = "28db3eb606154f67aec162526231909";
 
+// // const inpSearch = document.getElementById('inpSearch');
+// const btnSearch = document.getElementById('btnSearch');
+
 
 const locationName = $("#locationName");
 const imgWeather = $("#imgWeather");
@@ -11,18 +14,20 @@ const wind = $("#wind");
 const pressure = $("#pressure");
 const uv = $("#uv");
 const visibility = $("#visibility");
-const cityInput = document.querySelector("#sec-input");
+const cityInput = document.querySelector("#inpSearch");
+const selectDate = document.querySelector("#selectDate");
+const btnHistoryId = $("#btnHistoryId");
 
 
 ////////////////////////////////////////////////////
 const map = L.map('map');
-    map.setView([0, 0],13);
+map.setView([0, 0], 13);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    L.marker([0, 0]).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   maxZoom: 19,
+   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+L.marker([0, 0]).addTo(map);
 
 
 /////////////////////////////////////////////////////////
@@ -61,7 +66,7 @@ if (navigator.geolocation) {
       //Display Forcast data
       $.ajax({
          method: "GET",
-         url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=4`,
+         url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=4`,
          success: (data) => {
             for (let index = 1; index < data.forecast.forecastday.length; index++) {
                $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
@@ -76,20 +81,20 @@ if (navigator.geolocation) {
             }
          }
       });
-      map.setView([latitude,longitude],13);
-      L.marker([latitude,longitude]).addTo(map);
+      map.setView([latitude, longitude], 13);
+      L.marker([latitude, longitude]).addTo(map);
 
       //Display Today's Weather
 
       $.ajax({
          method: "GET",
-         url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=0`,
-         success:(data)=>{
-            for(let i=6;i<23;i++){
-               if(i%3==0){
+         url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=0`,
+         success: (data) => {
+            for (let i = 6; i < 23; i++) {
+               if (i % 3 == 0) {
                   $(`#imgHour${i}`).attr("src", data.forecast.forecastday[0].day.condition.icon);
-                  $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c+ "°C");
-                  $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph+ "Km/h")
+                  $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c + "°C");
+                  $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph + "Km/h")
                   $(`#humHour${i}`).html(data.forecast.forecastday[0].hour[i].humidity + "%");
                }
 
@@ -97,7 +102,67 @@ if (navigator.geolocation) {
          }
       });
 
-      
+      // Histroy Data
+      // btnHistoryId.addEventListener("click", e => {
+      //    $.ajax({
+      //       method: "GET",
+      //       url: `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${city}&dt=${inputDate}`,
+      //       success: (data) => {
+      //          $(`#historyDate`).html(data.forecast.forecastday[0].date);
+      //          $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
+      //          $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
+      //          $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
+      //          $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
+      //          $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
+      //          $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
+
+      //       }
+      //    });
+
+      // });
+
+      btnHistoryId.on("click", () => {
+         const inputDate = $("#selectDate").val(); // Get the date input value from an input field
+         if (inputDate && cityInput.value.trim()) {
+            const cityName = cityInput.value.trim();
+            getHistoryData(cityName, inputDate);
+
+         } else if (inputDate){
+            //getHistoricalDataForCurrentLocation(inputDate);
+            if (navigator.geolocation) {
+               navigator.geolocation.getCurrentPosition(function (position) {
+                  // Retrieve latitude and longitude
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+
+                  // Make an AJAX request to fetch the city name based on coordinates
+                  $.ajax({
+                     method: "GET",
+                     url: `http://api.weatherapi.com/v1/history.json?Key=${apiKey}&q=${latitude},${longitude}&dt=${inputDate}`,
+                     success: (data) => {
+                        //const city = resp.location.name;
+                        $(`#historyDate`).html(data.forecast.forecastday[0].date);
+                        $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
+                        $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
+                        $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
+                        $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
+                        $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
+                        $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
+
+                     },
+                  });
+               });
+            } else {
+               console.error("Geolocation is not supported by this browser.");
+            }
+         } else {
+            alert("Please enter a date to retrieve historical weather data.");
+         }
+      });
+
+
+
+
    }, function (error) {
       // Handle errors (e.g. user denied location access)
       console.error("Error getting current location: " + error.message);
@@ -119,18 +184,36 @@ async function fetchText(lat, long) {
    city = cityData[0].name;
 
    console.log(city);
-   checkWeather(city);
 }
 
 
 
-function searchBtnOnClick() {
-   const cityName = cityInput.value.trim();
-   
+btnSearch.addEventListener('click', e => {
+   e.preventDefault();
 
+   currentWeather();
+   forecastWeather();
+   currentDayWeather();
+   cityInput.value = "";
+
+});
+
+
+
+// function btnHistoty() {
+//    //e.preventDefault();
+//    let inputDate = selectDate.value;
+//    if (inputDate && cityInput.value.trim()) {
+//       const cityName = cityInput.value.trim();
+//       getHistoryData(cityName, inputDate);
+//    }
+// }
+
+async function currentWeather() {
+   const cityName = cityInput.value.trim();
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/current.json?Key=28db3eb606154f67aec162526231909&q=${cityName}`,
+      url: `http://api.weatherapi.com/v1/current.json?Key=${apiKey}&q=${cityName}`,
       success: (resp) => {
          console.log(resp);
          locationName.text(resp.location.name);
@@ -145,16 +228,20 @@ function searchBtnOnClick() {
          visibility.text(resp.current.vis_km);
          const lt = resp.location.lat;
          const lng = resp.location.lon;
-         map.setView([lt,lng],13);
-         L.marker([lt,lng]).addTo(map);
+         map.setView([lt, lng], 13);
+         L.marker([lt, lng]).addTo(map);
 
       }
    });
 
-   // Set Forecast Data
+}
+
+async function forecastWeather() {
+   const cityName = cityInput.value.trim();
+
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${cityName}&days=4`,
+      url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=4`,
       success: (data) => {
          for (let index = 1; index < data.forecast.forecastday.length; index++) {
             $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
@@ -169,34 +256,36 @@ function searchBtnOnClick() {
          }
       }
    });
+}
 
-    //Display Today's Weather
-    $.ajax({
+async function currentDayWeather() {
+   const cityName = cityInput.value.trim();
+
+   $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${cityName}&days=0`,
-      success:(data)=>{
-         for(let i=6;i<23;i++){
-            if(i%3==0){
+      url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=0`,
+      success: (data) => {
+         for (let i = 6; i < 23; i++) {
+            if (i % 3 == 0) {
                $(`#imgHour${i}`).attr("src", data.forecast.forecastday[0].day.condition.icon);
-               $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c+ "°C");
-               $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph+ "Km/h")
+               $(`#tempHour${i}`).html(data.forecast.forecastday[0].hour[i].temp_c + "°C");
+               $(`#windHour${i}`).html(data.forecast.forecastday[0].hour[i].wind_kph + "Km/h")
                $(`#humHour${i}`).html(data.forecast.forecastday[0].hour[i].humidity + "%");
             }
 
          }
       }
    });
-
 }
 
-function historyBtnOnClick(){
-   const inputDate=selectDate.value;
-  
+
+
+async function getHistoryData(cityName, inputDate) {
 
    $.ajax({
       method: "GET",
-      url : `http://api.weatherapi.com/v1/history.json?key=28db3eb606154f67aec162526231909&q=Colombo&dt=${inputDate}`,
-      success:(data)=>{
+      url: `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${cityName}&dt=${inputDate}`,
+      success: (data) => {
          $(`#historyDate`).html(data.forecast.forecastday[0].date);
          $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
          $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
@@ -206,7 +295,26 @@ function historyBtnOnClick(){
          $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
 
       }
-
    });
 }
+
+//Dark - Light mode
+// document.addEventListener('DOMContentLoaded', function () {
+//    const body = document.body;
+//    const darkModeLabel = document.getElementById('darkModeLabel');
+
+//    themeSwitch.addEventListener('change',e=>{
+//        if(themeSwitch.checked){
+//            body.classList.add('theme-dark');
+//            darkModeLabel.classList.add('labelDarkMode');
+//        }else{
+//            body.classList.remove("theme-dark");
+//            darkModeLabel.classList.remove('labelDarkMode');
+//        }
+//    });
+// });
+
+// const themeSwitch = document.getElementById('flexSwitchCheckDefault');
+// themeSwitch.checked = false;
+
 
