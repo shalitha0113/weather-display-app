@@ -263,5 +263,40 @@ table{
     left: 25px;
 }
 
+.current-day{
+    padding: 5px;
+}
+
+.day-forcast{
+    display: flex;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+.weatherTime-Card{
+    width: 115px;
+    height: 250px;
+    background-color: rgb(229, 229, 233);
+    padding: 10px;
+    border-radius: 12px;
+
+}
+
+.weather-history{
+    position: relative;
+    top: -520px;
+    left: 140px;
+    width: 1170px;
+    height:400px;
+    background-color: rgb(229, 229, 233);
+    border-radius: 12px;
+    padding: 20px;
+    
+}
+
+.weather-history table{
+    max-width: 300px;
+}
+
 
 
