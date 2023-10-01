@@ -1,8 +1,11 @@
+function modeChange(){
+   var element=document.body;
+   element.dataset.bsTheme= element.dataset.bsTheme=="light"? "dark":"light";
+}
+
+
+// ------------------
 const apiKey = "28db3eb606154f67aec162526231909";
-
-// // const inpSearch = document.getElementById('inpSearch');
-// const btnSearch = document.getElementById('btnSearch');
-
 
 const locationName = $("#locationName");
 const imgWeather = $("#imgWeather");
@@ -51,13 +54,13 @@ if (navigator.geolocation) {
             locationName.text(resp.location.name);
             imgWeather[0].src = resp.current.condition.icon;
             txtWeather.text(resp.current.condition.text);
-            temp.text(resp.current.temp_c);
-            humidity.text(resp.current.humidity);
-            tempFeel.text(resp.current.feelslike_c);
-            wind.text(resp.current.wind_kph);
-            pressure.text(resp.current.pressure_mb);
-            uv.text(resp.current.uv);
-            visibility.text(resp.current.vis_km);
+            temp.text(resp.current.temp_c+ " °C");
+            humidity.text(resp.current.humidity + "%");
+            tempFeel.text(resp.current.feelslike_c+ " °C");
+            wind.text(resp.current.wind_kph+ " Km/h");
+            pressure.text(resp.current.pressure_mb+" hPa");
+            uv.text(resp.current.uv + "%");
+            visibility.text(resp.current.vis_km +" Km");
 
          }
       });
@@ -102,24 +105,6 @@ if (navigator.geolocation) {
          }
       });
 
-      // Histroy Data
-      // btnHistoryId.addEventListener("click", e => {
-      //    $.ajax({
-      //       method: "GET",
-      //       url: `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${city}&dt=${inputDate}`,
-      //       success: (data) => {
-      //          $(`#historyDate`).html(data.forecast.forecastday[0].date);
-      //          $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
-      //          $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
-      //          $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
-      //          $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
-      //          $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
-      //          $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
-
-      //       }
-      //    });
-
-      // });
 
       btnHistoryId.on("click", () => {
          const inputDate = $("#selectDate").val(); // Get the date input value from an input field
@@ -145,9 +130,9 @@ if (navigator.geolocation) {
                         $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
                         $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
                         $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
-                        $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
-                        $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
-                        $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
+                        $(`#historyMaxTemp`).html("Max temp "+data.forecast.forecastday[0].day.maxtemp_c + "°C");
+                        $(`#historyMinTemp`).html("Min temp "+data.forecast.forecastday[0].day.mintemp_c + "°C");
+                        $(`#historyHumidity`).html("Humidity "+data.forecast.forecastday[0].day.avghumidity + "%");
 
                      },
                   });
@@ -198,17 +183,6 @@ btnSearch.addEventListener('click', e => {
 
 });
 
-
-
-// function btnHistoty() {
-//    //e.preventDefault();
-//    let inputDate = selectDate.value;
-//    if (inputDate && cityInput.value.trim()) {
-//       const cityName = cityInput.value.trim();
-//       getHistoryData(cityName, inputDate);
-//    }
-// }
-
 async function currentWeather() {
    const cityName = cityInput.value.trim();
    $.ajax({
@@ -219,13 +193,13 @@ async function currentWeather() {
          locationName.text(resp.location.name);
          imgWeather[0].src = resp.current.condition.icon;
          txtWeather.text(resp.current.condition.text);
-         temp.text(resp.current.temp_c);
-         humidity.text(resp.current.humidity);
-         tempFeel.text(resp.current.feelslike_c);
-         wind.text(resp.current.wind_kph);
-         pressure.text(resp.current.pressure_mb);
-         uv.text(resp.current.uv);
-         visibility.text(resp.current.vis_km);
+         temp.text(resp.current.temp_c+ " °C");
+         humidity.text(resp.current.humidity+ " %");
+         tempFeel.text(resp.current.feelslike_c+ " °C");
+         wind.text(resp.current.wind_kph+ " Km/h");
+         pressure.text(resp.current.pressure_mb+ " hPa");
+         uv.text(resp.current.uv+ " %");
+         visibility.text(resp.current.vis_km+ " km");
          const lt = resp.location.lat;
          const lng = resp.location.lon;
          map.setView([lt, lng], 13);
@@ -297,24 +271,5 @@ async function getHistoryData(cityName, inputDate) {
       }
    });
 }
-
-//Dark - Light mode
-// document.addEventListener('DOMContentLoaded', function () {
-//    const body = document.body;
-//    const darkModeLabel = document.getElementById('darkModeLabel');
-
-//    themeSwitch.addEventListener('change',e=>{
-//        if(themeSwitch.checked){
-//            body.classList.add('theme-dark');
-//            darkModeLabel.classList.add('labelDarkMode');
-//        }else{
-//            body.classList.remove("theme-dark");
-//            darkModeLabel.classList.remove('labelDarkMode');
-//        }
-//    });
-// });
-
-// const themeSwitch = document.getElementById('flexSwitchCheckDefault');
-// themeSwitch.checked = false;
 
 
