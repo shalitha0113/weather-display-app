@@ -1,3 +1,10 @@
+function modeChange(){
+   var element=document.body;
+   element.dataset.bsTheme= element.dataset.bsTheme=="light"? "dark":"light";
+}
+
+
+// ------------------
 const apiKey = "28db3eb606154f67aec162526231909";
 
 // // const inpSearch = document.getElementById('inpSearch');
@@ -51,13 +58,13 @@ if (navigator.geolocation) {
             locationName.text(resp.location.name);
             imgWeather[0].src = resp.current.condition.icon;
             txtWeather.text(resp.current.condition.text);
-            temp.text(resp.current.temp_c);
-            humidity.text(resp.current.humidity);
-            tempFeel.text(resp.current.feelslike_c);
-            wind.text(resp.current.wind_kph);
-            pressure.text(resp.current.pressure_mb);
-            uv.text(resp.current.uv);
-            visibility.text(resp.current.vis_km);
+            temp.text(resp.current.temp_c+ " °C");
+            humidity.text(resp.current.humidity + "%");
+            tempFeel.text(resp.current.feelslike_c+ " °C");
+            wind.text(resp.current.wind_kph+ " Km/h");
+            pressure.text(resp.current.pressure_mb+" hPa");
+            uv.text(resp.current.uv + "%");
+            visibility.text(resp.current.vis_km +" Km");
 
          }
       });
@@ -145,9 +152,9 @@ if (navigator.geolocation) {
                         $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
                         $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
                         $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
-                        $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
-                        $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
-                        $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
+                        $(`#historyMaxTemp`).html("Max temp "+data.forecast.forecastday[0].day.maxtemp_c + "°C");
+                        $(`#historyMinTemp`).html("Min temp "+data.forecast.forecastday[0].day.mintemp_c + "°C");
+                        $(`#historyHumidity`).html("Humidity "+data.forecast.forecastday[0].day.avghumidity + "%");
 
                      },
                   });
@@ -219,13 +226,13 @@ async function currentWeather() {
          locationName.text(resp.location.name);
          imgWeather[0].src = resp.current.condition.icon;
          txtWeather.text(resp.current.condition.text);
-         temp.text(resp.current.temp_c);
-         humidity.text(resp.current.humidity);
-         tempFeel.text(resp.current.feelslike_c);
-         wind.text(resp.current.wind_kph);
-         pressure.text(resp.current.pressure_mb);
-         uv.text(resp.current.uv);
-         visibility.text(resp.current.vis_km);
+         temp.text(resp.current.temp_c+ " °C");
+         humidity.text(resp.current.humidity+ " %");
+         tempFeel.text(resp.current.feelslike_c+ " °C");
+         wind.text(resp.current.wind_kph+ " Km/h");
+         pressure.text(resp.current.pressure_mb+ " hPa");
+         uv.text(resp.current.uv+ " %");
+         visibility.text(resp.current.vis_km+ " km");
          const lt = resp.location.lat;
          const lng = resp.location.lon;
          map.setView([lt, lng], 13);
