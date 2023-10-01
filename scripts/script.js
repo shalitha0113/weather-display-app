@@ -7,10 +7,6 @@ function modeChange(){
 // ------------------
 const apiKey = "28db3eb606154f67aec162526231909";
 
-// // const inpSearch = document.getElementById('inpSearch');
-// const btnSearch = document.getElementById('btnSearch');
-
-
 const locationName = $("#locationName");
 const imgWeather = $("#imgWeather");
 const txtWeather = $("#txtWeather");
@@ -109,24 +105,6 @@ if (navigator.geolocation) {
          }
       });
 
-      // Histroy Data
-      // btnHistoryId.addEventListener("click", e => {
-      //    $.ajax({
-      //       method: "GET",
-      //       url: `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${city}&dt=${inputDate}`,
-      //       success: (data) => {
-      //          $(`#historyDate`).html(data.forecast.forecastday[0].date);
-      //          $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
-      //          $(`#historyTemp`).html(data.forecast.forecastday[0].day.avgtemp_c + "°C");
-      //          $(`#historyCondition`).html(data.forecast.forecastday[0].day.condition.text);
-      //          $(`#historyMaxTemp`).html(data.forecast.forecastday[0].day.maxtemp_c + "°C");
-      //          $(`#historyMinTemp`).html(data.forecast.forecastday[0].day.mintemp_c + "°C");
-      //          $(`#historyHumidity`).html(data.forecast.forecastday[0].day.avghumidity + "%");
-
-      //       }
-      //    });
-
-      // });
 
       btnHistoryId.on("click", () => {
          const inputDate = $("#selectDate").val(); // Get the date input value from an input field
@@ -204,17 +182,6 @@ btnSearch.addEventListener('click', e => {
    cityInput.value = "";
 
 });
-
-
-
-// function btnHistoty() {
-//    //e.preventDefault();
-//    let inputDate = selectDate.value;
-//    if (inputDate && cityInput.value.trim()) {
-//       const cityName = cityInput.value.trim();
-//       getHistoryData(cityName, inputDate);
-//    }
-// }
 
 async function currentWeather() {
    const cityName = cityInput.value.trim();
@@ -304,24 +271,5 @@ async function getHistoryData(cityName, inputDate) {
       }
    });
 }
-
-//Dark - Light mode
-// document.addEventListener('DOMContentLoaded', function () {
-//    const body = document.body;
-//    const darkModeLabel = document.getElementById('darkModeLabel');
-
-//    themeSwitch.addEventListener('change',e=>{
-//        if(themeSwitch.checked){
-//            body.classList.add('theme-dark');
-//            darkModeLabel.classList.add('labelDarkMode');
-//        }else{
-//            body.classList.remove("theme-dark");
-//            darkModeLabel.classList.remove('labelDarkMode');
-//        }
-//    });
-// });
-
-// const themeSwitch = document.getElementById('flexSwitchCheckDefault');
-// themeSwitch.checked = false;
 
 
