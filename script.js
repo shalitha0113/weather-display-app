@@ -48,7 +48,7 @@ if (navigator.geolocation) {
 
       $.ajax({
          method: "GET",
-         url: `http://api.weatherapi.com/v1/current.json?Key=${apiKey}&q=${latitude},${longitude}`,
+         url: `http://api.weatherapi.com/v1/current.json?Key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}`,
          success: (resp) => {
             console.log(resp);
             locationName.text(resp.location.name);
@@ -69,7 +69,7 @@ if (navigator.geolocation) {
       //Display Forcast data
       $.ajax({
          method: "GET",
-         url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=4`,
+         url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=4`,
          success: (data) => {
             for (let index = 1; index < data.forecast.forecastday.length; index++) {
                $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
@@ -91,7 +91,7 @@ if (navigator.geolocation) {
 
       $.ajax({
          method: "GET",
-         url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=0`,
+         url: `http://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=0`,
          success: (data) => {
             for (let i = 6; i < 23; i++) {
                if (i % 3 == 0) {
@@ -123,7 +123,7 @@ if (navigator.geolocation) {
                   // Make an AJAX request to fetch the city name based on coordinates
                   $.ajax({
                      method: "GET",
-                     url: `http://api.weatherapi.com/v1/history.json?Key=${apiKey}&q=${latitude},${longitude}&dt=${inputDate}`,
+                     url: `http://api.weatherapi.com/v1/history.json?Key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&dt=${inputDate}`,
                      success: (data) => {
                         //const city = resp.location.name;
                         $(`#historyDate`).html(data.forecast.forecastday[0].date);
