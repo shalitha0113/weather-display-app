@@ -48,7 +48,7 @@ if (navigator.geolocation) {
 
       $.ajax({
          method: "GET",
-         url: `https://api.weatherapi.com/v1/current.json?Key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}`,
+         url: `https://api.weatherapi.com/v1/current.json?Key=${apiKey}&q=${latitude},${longitude}`,
          success: (resp) => {
             console.log(resp);
             locationName.text(resp.location.name);
@@ -69,7 +69,7 @@ if (navigator.geolocation) {
       //Display Forcast data
       $.ajax({
          method: "GET",
-         url: `https://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=4`,
+         url: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=4`,
          success: (data) => {
             for (let index = 1; index < data.forecast.forecastday.length; index++) {
                $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
@@ -91,7 +91,7 @@ if (navigator.geolocation) {
 
       $.ajax({
          method: "GET",
-         url: `https://api.weatherapi.com/v1/forecast.json?key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&days=0`,
+         url: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=0`,
          success: (data) => {
             for (let i = 6; i < 23; i++) {
                if (i % 3 == 0) {
@@ -123,7 +123,7 @@ if (navigator.geolocation) {
                   // Make an AJAX request to fetch the city name based on coordinates
                   $.ajax({
                      method: "GET",
-                     url: `https://api.weatherapi.com/v1/history.json?Key=28db3eb606154f67aec162526231909&q=${latitude},${longitude}&dt=${inputDate}`,
+                     url: `https://api.weatherapi.com/v1/history.json?Key=${apiKey}&q=${latitude},${longitude}&dt=${inputDate}`,
                      success: (data) => {
                         //const city = resp.location.name;
                         $(`#historyDate`).html(data.forecast.forecastday[0].date);
@@ -187,7 +187,7 @@ async function currentWeather() {
    const cityName = cityInput.value.trim();
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/current.json?Key=${apiKey}&q=${cityName}`,
+      url: `https://api.weatherapi.com/v1/current.json?Key=${apiKey}&q=${cityName}`,
       success: (resp) => {
          console.log(resp);
          locationName.text(resp.location.name);
@@ -215,7 +215,7 @@ async function forecastWeather() {
 
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=4`,
+      url: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=4`,
       success: (data) => {
          for (let index = 1; index < data.forecast.forecastday.length; index++) {
             $(`#forecastDay${index}`).html(data.forecast.forecastday[index].date);
@@ -237,7 +237,7 @@ async function currentDayWeather() {
 
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=0`,
+      url: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=0`,
       success: (data) => {
          for (let i = 6; i < 23; i++) {
             if (i % 3 == 0) {
@@ -258,7 +258,7 @@ async function getHistoryData(cityName, inputDate) {
 
    $.ajax({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${cityName}&dt=${inputDate}`,
+      url: `https://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${cityName}&dt=${inputDate}`,
       success: (data) => {
          $(`#historyDate`).html(data.forecast.forecastday[0].date);
          $(`#historyImg`).attr("src", data.forecast.forecastday[0].day.condition.icon);
